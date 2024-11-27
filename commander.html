@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>BeckaDelice - Commander</title>
+    <title>BeckaDelices - Commander</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -184,7 +184,7 @@
             </div>
           </div>
     
-          <script>
+          <!-- <script>
                 document.getElementById("messageWhatsapp").addEventListener("click", function (event){
                     // Empêche le rechargement de la page
                     event.preventDefault();
@@ -213,7 +213,66 @@
                     // Ouvrir WhatsApp avec le message pré-rempli
                     window.open(url, "_blank");
                 });
+          </script> -->
+
+          <script>
+            document.getElementById("messageWhatsapp").addEventListener("click", function (event) {
+                // Prevent page reload
+                event.preventDefault();
+    
+                // Collect form inputs
+                const name = document.getElementById("name")?.value.trim();
+                const email = document.getElementById("email")?.value.trim();
+                const date = document.getElementById("datetime")?.value.trim();
+                const num = document.getElementById("selectNum")?.value.trim();
+                const ndonut =
+                  document.getElementById("n-donuts")?.value.trim() || 0; // Default to 0 if empty
+                const nbiscuit =
+                  document.getElementById("n-biscuits")?.value.trim() || 0; // Default to 0 if empty
+                const message = document.getElementById("message")?.value.trim();
+                const phone = "50939042279";
+    
+                // Validate required fields
+                if (!name || !email || !date || !message) {
+                  alert("Veuillez remplir tous les champs requis.");
+                  return;
+                }
+    
+                // Construct the WhatsApp message
+                const messageCommande = `
+                  Bonjour, je suis ${name}.
+                  Je veux commander:
+                  - ${num} gâteau(x),
+                  - ${ndonut} donut(s),
+                  - ${nbiscuit} biscuit(s).
+                  Message: ${message}.
+                  J'aimerais les avoir: ${date}.
+                  
+                  ${name}
+                  ${email}
+                  `.trim();
+    
+                // Replace newlines with `%0A` (URL-encoded for newlines)
+                const formattedMessage = messageCommande.replace(/\n/g, "%0A");
+    
+                // Construct the WhatsApp URL using `wa.me`
+                const url = `https://wa.me/${phone}?text=${formattedMessage}`;
+    
+                console.log("Generated URL:", url);
+    
+                // Open WhatsApp with pre-filled message
+                try {
+                  window.open(url, "_blank");
+                } catch (error) {
+                  console.error("Error opening WhatsApp:", error);
+                  alert(
+                    "Une erreur s'est produite lors de l'ouverture de WhatsApp."
+                  );
+                }
+              });
           </script>
+
+
     
           <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -280,8 +339,8 @@
                 <a class="btn btn-outline-light btn-social" href=""
                   ><i class="bi bi-facebook"></i
                 ></a>
-                <a class="btn btn-outline-light btn-social" href=""
-                  ><i class="bi bi-youtube"></i
+                <a class="btn btn-outline-light btn-social" href="https://www.instagram.com/beckadelices/" target="_blank"
+                  ><i class="bi bi-instagram"></i
                 ></a>
                 <a
                   class="btn btn-outline-light btn-social"
